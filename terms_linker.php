@@ -14,6 +14,7 @@ ini_set('display_errors', TRUE);
 if (IS_CLI) {
  $terms = array();
  $read_handle = fopen(FILE_TERMS, 'r');
+ $num_attempts = 0;
  if($read_handle) {
   while(($line = fgets($read_handle)) !== FALSE) {
    $num_inserted = 0;
@@ -30,15 +31,22 @@ if (IS_CLI) {
     foreach($terms as $term) {
      $tid2 = get_term_tid($term);
      if(is_numeric($tid1) && is_numeric($tid2)) {
-       //$inserted = write_relation($tid1, $tid2);
+       $inserted = write_relation($tid1, $tid2);
      }
-     //$num_inserted = $num_inserted + $inserted;
+     $num_inserted = $num_inserted + $inserted;
+     $num_attempts++;
     }
    }
   }
   fclose($read_handle);
+  $num_failures = $num_attempts - $num_inserted;
  }
 }
+
+echo "Attempts: " . $num_attempts . "\n";
+echo "Successes: " . $num_successes . "\n";
+echo "Failures: " . $num_failures . "\n";
+exit();
 
 function connect_to_db() {
  global $DB;
@@ -66,11 +74,7 @@ function get_term_tid($term_name) {
   $stmt->execute();
   $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
   if(count($rows) > 0 && $rows[0]['tid']) {
-   echo $rows[0]['tid'];
    return $rows[0]['tid'];
-  }
-  else {
-   var_dump($rows);
   }
  }
 }
