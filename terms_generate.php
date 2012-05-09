@@ -8,6 +8,7 @@ if (IS_CLI) {
  $terms = array();
  if($read_handle = fopen(FILE_TERMS, 'r') && $write_handle = fopen(FILE_SAVE_TERMS, 'a+')) {
    while(($line = fgets($read_handle)) !== FALSE) {
+     echo($line);
      $terms = explode(',', $line);
      if(is_array($terms) && count($terms) > 0) {
        foreach($terms as $term) {
