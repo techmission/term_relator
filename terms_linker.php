@@ -1,7 +1,6 @@
 <?php
 
 global $DB;
-global $CALL_COUNTER;
 
 define('IS_CLI', PHP_SAPI === 'cli');
 define('FILE_TERMS', dirname(__FILE__) . '/terms-list.txt');
@@ -57,8 +56,7 @@ function connect_to_db() {
 }
 
 function get_term_tid($term_name) {
- global $CALL_COUNTER;
- if(!empty($term_name) && $CALL_COUNTER < 2) {
+ if(!empty($term_name)) {
   $stmt = $DB->prepare('SELECT tid FROM um_term_data WHERE name = :name');
   $stmt->bindValue(':name', $term, PDO::PARAM_STR);
   $stmt->execute();
@@ -70,7 +68,6 @@ function get_term_tid($term_name) {
    var_dump($rows);
   }
  }
- $CALL_COUNTER++;
 }
 
 function write_relation($tid1, $tid2) {
