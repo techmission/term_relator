@@ -43,7 +43,6 @@ if (IS_CLI) {
    }
   }
   fclose($read_handle);
-  $num_failures = $num_attempts - $num_inserted;
  }
 }
 
