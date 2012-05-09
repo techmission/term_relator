@@ -97,7 +97,7 @@ function write_relation($tid1, $tid2) {
   global $DB;
   $num_inserted = 0;
   if(is_numeric($tid1) && is_numeric($tid2)) {
-    $stmt = $DB->dbh->prepare('INSERT INTO bk_term_relation(tid1, tid2) VALUES(:tid1, :tid2)');
+    $stmt = $DB->dbh->prepare('INSERT INTO um_term_relation(tid1, tid2) VALUES(:tid1, :tid2)');
     $stmt->bindValue(':tid1', $tid1, PDO::PARAM_INT);
     $stmt->bindValue(':tid2', $tid2, PDO::PARAM_INT);
     $stmt->execute();
