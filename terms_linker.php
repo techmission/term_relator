@@ -59,6 +59,7 @@ function connect_to_db() {
 }
 
 function get_term_tid($term_name) {
+ global $DB;
  if(!empty($term_name)) {
   $stmt = $DB->prepare('SELECT tid FROM um_term_data WHERE name = :name');
   $stmt->bindValue(':name', $term, PDO::PARAM_STR);
