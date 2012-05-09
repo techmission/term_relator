@@ -32,10 +32,11 @@ if (IS_CLI) {
      $tid2 = get_term_tid($term);
      if(is_numeric($tid1) && is_numeric($tid2)) {
        $inserted = write_relation($tid1, $tid2);
-       $num_inserted = $num_inserted + $inserted;
+       $num_inserted++;
      }
      else {
        echo "Failed on: " . $svc_area . " | " . $term . "\n";
+       $num_failures++;
      }
      $num_attempts++;
     }
