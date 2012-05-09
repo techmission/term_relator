@@ -8,6 +8,9 @@ define('FILE_TERMS', dirname(__FILE__) . '/terms-list.txt');
 // Load the class for doing the inserts to the database.
 require_once(dirname(__FILE__) . '/jobsdb.class.php');
 
+// Temporarily display runtime errors to the screen.
+ini_set('display_errors', TRUE);
+
 if (IS_CLI) {
  $terms = array();
  $read_handle = fopen(FILE_TERMS, 'r');
