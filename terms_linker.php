@@ -21,7 +21,7 @@ if (IS_CLI) {
    connect_to_db();
    $terms = explode(',', $line);
    if(is_array($terms) && count($terms) > 0) {
-    var_dump($terms);
+    //var_dump($terms);
     $svc_area = array_shift($terms);
     if($svc_area == '"Sound') {
       $svc_area = 'Sound, Lights, Video Ministry';
@@ -62,10 +62,11 @@ function get_term_tid($term_name) {
  global $DB;
  if(!empty($term_name)) {
   $stmt = $DB->dbh->prepare('SELECT tid FROM um_term_data WHERE name = :name');
-  $stmt->bindValue(':name', $term, PDO::PARAM_STR);
+  $stmt->bindValue(':name', $term_name, PDO::PARAM_STR);
   $stmt->execute();
   $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
   if(count($rows) > 0 && $rows[0]['tid']) {
+   echo $rows[0]['tid'];
    return $rows[0]['tid'];
   }
   else {
