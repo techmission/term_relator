@@ -61,7 +61,7 @@ function connect_to_db() {
 function get_term_tid($term_name) {
  global $DB;
  if(!empty($term_name)) {
-  $stmt = $DB->prepare('SELECT tid FROM um_term_data WHERE name = :name');
+  $stmt = $DB->dbh->prepare('SELECT tid FROM um_term_data WHERE name = :name');
   $stmt->bindValue(':name', $term, PDO::PARAM_STR);
   $stmt->execute();
   $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -78,7 +78,7 @@ function write_relation($tid1, $tid2) {
   global $DB;
   $num_inserted = 0;
   if(is_numeric($tid1) && is_numeric($tid2)) {
-    $stmt = $DB->prepare('INSERT INTO bk_term_relation(tid1, tid2) VALUES(:tid1, :tid2)');
+    $stmt = $DB->dbh->prepare('INSERT INTO bk_term_relation(tid1, tid2) VALUES(:tid1, :tid2)');
     $stmt->bindValue(':tid1', $tid1, PDO::PARAM_INT);
     $stmt->bindValue(':tid2', $tid2, PDO::PARAM_INT);
     $stmt->execute();
