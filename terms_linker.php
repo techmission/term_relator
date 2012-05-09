@@ -44,7 +44,7 @@ if (IS_CLI) {
 }
 
 echo "Attempts: " . $num_attempts . "\n";
-echo "Successes: " . $num_successes . "\n";
+echo "Successes: " . $num_inserted . "\n";
 echo "Failures: " . $num_failures . "\n";
 exit();
 
